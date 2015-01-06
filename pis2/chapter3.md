@@ -48,7 +48,7 @@ println(List(1,2,3) == 1::2::3::Nil) // true
 Like lists, tuples are immutable, but unlike lists, tuples can contain different types of elements. You can use tuple to return multiple objects from a method
 
 ```scala
-val pair = (42, 'vgs')
+val pair = (42, "vgs")
 // tuple序号从1开始，Haskell和ML传统
 print pair._1
 // 之所以不用pair(2)是因为apply总是会返回一样类型的数据
