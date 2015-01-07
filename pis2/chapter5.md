@@ -42,7 +42,7 @@ Almost the same as java. Unicode characters can appear any where in scala progra
 You can use any method in operator notation, there are also prefix and postfix operators.  
 The only identifiers that can be used as prefix operators are +, -, !, and ~. They are treated as unary_-, unary_+  
 Postfix operators are methods that take no arguments, when invoked without a dot or parentheses. In scala, <mark>you can leave empty paratheses on method calls</mark>.   
-Convention is that you include parenthese if the method has side effects, such as println, and leave them off if no side effects.
+Convention is that you include parenthese if the method has side effects, such as println(), and leave them off if no side effects.
 
 
 ```scala
