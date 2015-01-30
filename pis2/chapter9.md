@@ -38,9 +38,39 @@ val file = new File("date.txt")  withPrintWriter(file) {    writer => writer.p
 ### By name parameters
 
 To make a by- name parameter, you give the parameter a type starting with => instead of () =>
+and the function(value) will be called when being used
 
 ```scala
  def byNameAssert(predicate: => Boolean) =   if (assertionsEnabled && !predicate)     throw new AssertionError
  // 5> 3 is evaluated at runtime
  byNameAssert(5 > 3) 
+ 
+ 
+def nano() = {
+    println("Getting nano")
+    System.nanoTime
+}
+ 
+def delayed(t: => Long) = { // => indicates a by-name parameter
+    println("In delayed method")
+    println("Param: "+t) // "Get nano" printed here
+    t
+}
+ 
+println(delayed(nano()))
+
+def whileLoop(cond: => Boolean)(stat: =>Unit): Unit = {
+  if (cond) {
+    stat
+    whileLoop(cond)(stat)
+  }
+}
+
+var i = 0
+whileLoop(i < 10) {
+  println(i)
+  i += 1
+}
 ```
+from language specification:  
+The type of a value parameter may be prefixed by =>, e.g. x: => T. The type of such a parameter is then the parameterless method type => T. This indicates that the corresponding argument is not evaluated at the point of function application, but instead is evaluated at each use within the function. That is, the argument is evaluated using call-by-name.
