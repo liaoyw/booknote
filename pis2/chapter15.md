@@ -126,3 +126,37 @@ def simplifyAdd(e: Expr) = e match {                 case BinOp("+", x, y) if x
 ## Pattern overlaps
 
 Patterns are tried in the order in which they are written. This is very important to write case class
+
+## The Option type
+
+Option has two forms ```Some(x) None```, we can get value use pattern matching.
+
+```scala
+val v = x match { 
+  case Some(s) => s
+  case None => "?"
+```
+
+## Patterns everywhere
+
+### patterns in variable definitions
+
+```scala
+val myTuple = (123, "abc")
+val (number, String) = myTuple
+
+val exp = new BinOp("*", Number(5), Number(1))
+val BinOp(op, left, right) = exp
+```
+
+### Case sequences as partial functions
+
+A sequence of cases (i.e., alternatives) in curly braces can be used anywhere a function literal can be used. Essentially, a case sequence is a function literal, only more general. Instead of having a single entry point and list of parameters, a case sequence has multiple entry points, each with their own list of parameters. Each case is an entry point to the function, and the parameters are specified with the pattern. The body of each entry point is the right-hand side of the case.
+
+```scala
+val withDefault: Option[Int] => Int = {          case Some(x) => x          case None => 0}
+```
+
+### Patterns in ```for``` expression
+
+```for ((country, city) <- capitals)```
